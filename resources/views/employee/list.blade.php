@@ -42,6 +42,7 @@
         @endforeach
         </tbody>
     </table>
+    {{ $employees->appends(request()->query())->links() }}
 
 
 

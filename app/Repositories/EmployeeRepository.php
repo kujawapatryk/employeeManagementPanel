@@ -19,7 +19,9 @@ class EmployeeRepository
 
     public function filterBy()
     {
-        return $this->employee->with(['company', 'dietaryPreference'])->get();
+        $query = $this->employee->with(['company', 'dietaryPreference']);
+
+        return $query->paginate(3);
     }
 
     public function create($data)
