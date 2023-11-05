@@ -11,7 +11,7 @@
 <body class="bg-gray-100">
 
 <div class="flex flex-col items-center justify-center h-screen">
-    <nav class="bg-blue-500 p-4 mx-auto max-w-screen-lg rounded mb-8">
+    <nav class="bg-blue-500 p-4 mx-auto max-w-screen-xl rounded mb-8">
         <ul class="flex space-x-4">
             <li class="nav-item active">
                 <a class="text-white px-4 py-2 rounded-full" href="{{route('employees.list')}}">Wszyscy Pracownicy</a>
@@ -28,7 +28,7 @@
         </ul>
     </nav>
 
-    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-screen-lg">
+    <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-screen-xl">
 
         <!-- Tutaj możesz umieścić zawartość dla poszczególnych akcji -->
 
