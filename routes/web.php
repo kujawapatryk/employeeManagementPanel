@@ -22,19 +22,22 @@ Route::get('/', function () {
 });
 
 Route::group([
-    'prefix' => 'employee',
-    'namespace' => 'Employee',
-    'as' => 'employee.'
+    'prefix' => 'employees',
+    'namespace' => 'Employees',
+    'as' => 'employees.'
 ], function () {
 
-    Route::get('', [EmployeeController::class, 'all'])
+    Route::get('', [EmployeeController::class, 'index'])
         ->name('list');
+
+    Route::get('/new', [EmployeeController::class, 'create'])
+        ->name('create');
+
+    Route::post('/new', [EmployeeController::class, 'store'])
+        ->name('store');
 
     Route::get('{employee}', [EmployeeController::class, 'showDetails'])
         ->name('show');
-
-    Route::post('', [EmployeeController::class, 'add'])
-        ->name('add');
 
     Route::patch('', [EmployeeController::class, 'update'])
         ->name('update');
