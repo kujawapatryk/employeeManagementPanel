@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class StoreEmployeeRequest extends FormRequest
 {
@@ -22,13 +23,19 @@ class StoreEmployeeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255|unique:employees,email,',
-            'company_id' => 'required|integer|exists:companies,id',
-            'phone_numbers' => 'required|array',
-            'phone_numbers.*' => 'required|string|distinct|min:7',
-            'dietary_preference_id' => 'required|integer|exists:dietary_preferences,id',
+            'first_name' => ['required', 'string', 'max:255'],
+            'last_name' => ['required', 'string', 'max:255'],
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('employees')->ignore($this->employee->id ?? null),
+            ],
+            'company_id' => ['required', 'integer', 'exists:companies,id'],
+            'phone_numbers' => ['required', 'array'],
+            'phone_numbers.*' => ['required', 'string', 'distinct', 'min:7'],
+            'dietary_preference_id' => ['required', 'integer', 'exists:dietary_preferences,id'],
         ];
     }
 
