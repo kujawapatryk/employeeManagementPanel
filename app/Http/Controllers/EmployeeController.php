@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Company;
 use App\Models\DietaryPreference;
+use App\Models\Employee;
 use App\Repositories\EmployeeRepository;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -12,9 +13,9 @@ use Illuminate\View\View;
 
 class EmployeeController extends Controller
 {
-    private EmployeeRepository $employee;
-    public function __construct(EmployeeRepository $employee){
-        $this->employee = $employee;
+    private EmployeeRepository $employeeRepo;
+    public function __construct(EmployeeRepository $employeeRepo){
+        $this->employeeRepo = $employeeRepo;
     }
 
     public function index(): View
@@ -22,14 +23,14 @@ class EmployeeController extends Controller
 
         //dd($this->employee->filterBy());
         return view('employee.list',[
-            'employees' => $this->employee->filterBy(),
+            'employees' => $this->employeeRepo->filterBy(),
         ]);
 
     }
 
     public function showDetails()
     {
-        return $this->employee->getOne(2);
+        return $this->employeeRepo->getOne(2);
     }
 
     public function create(): View
@@ -44,21 +45,33 @@ class EmployeeController extends Controller
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
-        $this->employee->create($validatedData);
+        $this->employeeRepo->create($validatedData);
         return redirect()
             ->route('employees.create')
             ->with('success', 'Pracownik został dodany.');
     }
 
-    public function edit()
+    public function edit(Employee $employee): view
     {
+
+        return view('employee.edit',[
+            'companies' => Company::all(),
+            'dietaryPreferences' => DietaryPreference::all(),
+            'employee' => $employee
+             ]);
 
     }
 
-    public function remove(int $id): RedirectResponse
+    public function update(StoreEmployeeRequest $request, Employee $employee): RedirectResponse
     {
-        $toRemove = $this->employee->getOne($id);
-        $toRemove->delete();
+        $validatedData = $request->validated();
+        $employee->update($validatedData);
+        return redirect()->route('employees.list')->with('success', 'Dane pracownika zostały zaktualizowane.');
+    }
+
+    public function remove(Employee $employee): RedirectResponse
+    {
+        $employee->delete();
         return redirect()
             ->route('employees.list')
             ->with('success', 'Pracownik został pomyślnie usunięty.');
