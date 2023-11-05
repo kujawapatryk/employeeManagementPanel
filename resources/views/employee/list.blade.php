@@ -15,9 +15,7 @@
         </tr>
         </thead>
         <tbody class="bg-white divide-y divide-gray-200">
-{{--        @dd($employees)--}}
         @foreach($employees as $employee)
-{{--            @dd($employee)--}}
             <tr class="@if($loop->odd) bg-gray-50 @endif">
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->first_name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->last_name }}</td>
@@ -25,6 +23,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->company->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     @if(is_array($employee->phone_numbers))
+
                         @foreach($employee->phone_numbers as $phone)
                             {{ $phone }}<br>
                         @endforeach

@@ -50,8 +50,18 @@
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="phone-numbers">
                     Telefon(y)
                 </label>
-                <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="phone-numbers" type="text" name="phone_numbers[]" placeholder="Dodaj numer telefonu" required>
-                <!--@@todo  Możliwość dodania kilku numerów telefonów-->
+                <div id="phone-numbers-container">
+                    <!-- Kontener na pola numerów telefonów -->
+                    @foreach (old('phone_numbers', ['']) as $index => $oldPhoneNumber)
+                        <div class="flex items-center mb-2">
+                            <input class="appearance-none block w-full bg-gray-200 text-gray-700 border rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white"
+                                   id="phone-numbers-{{ $index }}" type="text" name="phone_numbers[]" placeholder="Dodaj numer telefonu"
+                                   value="{{ $oldPhoneNumber }}" required>
+                            <button type="button" class="remove-phone-number ml-2 text-red-500">&times;</button>
+                        </div>
+                    @endforeach
+                </div>
+                <button type="button" id="add-phone-number" class="mt-2 text-sm text-blue-500">+ Dodaj kolejny numer</button>
             </div>
         </div>
 
@@ -66,7 +76,6 @@
                         <option value="{{ $preference->id }}" {{ (old('dietary_preference_id') == $preference->id) ? 'selected' : '' }}>
                             {{ $preference->name }}
                         </option>
-{{--                        <option value="{{ $preference->id }}">{{ $preference->name }}</option>--}}
                     @endforeach
                 </select>
             </div>
@@ -81,5 +90,23 @@
         </div>
     </form>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const container = document.querySelector('#phone-numbers-container');
+            const addButton = document.querySelector('#add-phone-number');
+
+            addButton.addEventListener('click', function () {
+                const newField = container.children[0].cloneNode(true);
+                newField.querySelector('input').value = '';
+                container.appendChild(newField);
+            });
+
+            container.addEventListener('click', function (event) {
+                if (event.target.classList.contains('remove-phone-number')) {
+                    event.target.parentNode.remove();
+                }
+            });
+        });
+    </script>
 
 @endsection
