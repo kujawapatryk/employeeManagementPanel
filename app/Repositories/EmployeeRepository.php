@@ -31,4 +31,8 @@ class EmployeeRepository
     {
         return $employee->update($validatedData);
     }
+
+    public function delete(Employee $employee): bool{
+        return $employee->delete();
+    }
 }

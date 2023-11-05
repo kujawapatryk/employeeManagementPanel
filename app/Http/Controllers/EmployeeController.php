@@ -66,19 +66,25 @@ class EmployeeController extends Controller
     {
         $validatedData = $request->validated();
         if ($this->employeeRepo->update($employee, $validatedData)) {
-            return redirect()->route('employees.list')->with('success', 'Dane pracownika zostały zaktualizowane.');
+            return redirect()
+                ->route('employees.list')
+                ->with('success', 'Dane pracownika zostały zaktualizowane.');
         } else {
-            return back()->withErrors('Nie udało się zaktualizować danych pracownika.');
+            return back()
+                ->withErrors('Nie udało się zaktualizować danych pracownika.');
         }
     }
 
     public function remove(Employee $employee): RedirectResponse
     {
-        $employee->delete();
+        if ($this->employeeRepo->delete($employee)) {
         return redirect()
             ->route('employees.list')
             ->with('success', 'Pracownik został pomyślnie usunięty.');
-
+        } else {
+            return back()
+                ->withErrors('Nie udało się usunąć pracownika.');
+        }
     }
     //
 }
