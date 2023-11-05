@@ -7,6 +7,7 @@
         <tr>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imię</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nazwisko</th>
+            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-mail</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Firma</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preferencje Żywieniowe</th>
@@ -20,6 +21,7 @@
             <tr class="@if($loop->odd) bg-gray-50 @endif">
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->first_name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->last_name }}</td>
+                <td class="px-6 py-4 whitespace-nowrap">{{ $employee->email }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->company->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap">
                     @if(is_array($employee->phone_numbers))
