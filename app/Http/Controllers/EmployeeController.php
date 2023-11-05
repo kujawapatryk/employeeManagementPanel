@@ -43,9 +43,11 @@ class EmployeeController extends Controller
 //StoreEmployeeRequest
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
-        $validatedData = $request->validated(); // Pobierz zweryfikowane dane jako tablicę
+        $validatedData = $request->validated();
         $this->employee->create($validatedData);
-        return redirect()->route('employees.create')->with('success', 'Pracownik został dodany.');
+        return redirect()
+            ->route('employees.create')
+            ->with('success', 'Pracownik został dodany.');
     }
 
     public function edit()
@@ -53,8 +55,13 @@ class EmployeeController extends Controller
 
     }
 
-    public function remove()
+    public function remove(int $id): RedirectResponse
     {
+        $toRemove = $this->employee->getOne($id);
+        $toRemove->delete();
+        return redirect()
+            ->route('employees.list')
+            ->with('success', 'Pracownik został pomyślnie usunięty.');
 
     }
     //

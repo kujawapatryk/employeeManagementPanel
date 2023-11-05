@@ -32,7 +32,7 @@
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->dietaryPreference->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{{ route('employees.show', $employee) }}" class="text-indigo-600 hover:text-indigo-900">Edytuj</a>
-                    <form method="post" action="{{ route('employees.remove', $employee) }}" class="inline">
+                    <form method="post" action="{{ route('employees.remove', $employee->id) }}" class="inline">
                         @csrf
                         @method('delete')
                         <button type="submit" class="text-red-600 hover:text-red-800">Usuń</button>
