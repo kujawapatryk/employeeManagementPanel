@@ -65,8 +65,11 @@ class EmployeeController extends Controller
     public function update(StoreEmployeeRequest $request, Employee $employee): RedirectResponse
     {
         $validatedData = $request->validated();
-        $employee->update($validatedData);
-        return redirect()->route('employees.list')->with('success', 'Dane pracownika zostały zaktualizowane.');
+        if ($this->employeeRepo->update($employee, $validatedData)) {
+            return redirect()->route('employees.list')->with('success', 'Dane pracownika zostały zaktualizowane.');
+        } else {
+            return back()->withErrors('Nie udało się zaktualizować danych pracownika.');
+        }
     }
 
     public function remove(Employee $employee): RedirectResponse

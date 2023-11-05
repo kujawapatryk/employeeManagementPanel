@@ -26,4 +26,9 @@ class EmployeeRepository
     {
         return $this->employee->create($data);
     }
+
+    public function update(Employee $employee, array $validatedData): bool
+    {
+        return $employee->update($validatedData);
+    }
 }
