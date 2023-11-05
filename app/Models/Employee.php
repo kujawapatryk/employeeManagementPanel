@@ -18,6 +18,9 @@ class Employee extends Model
         'phone_numbers',
         'dietary_preference_id',
     ];
+    protected $casts = [
+        'phone_numbers' => 'array',
+    ];
 
     public function company(): BelongsTo
     {
