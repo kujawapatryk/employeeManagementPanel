@@ -1,7 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-    @include('components.alerts')
+
     <form method="POST" action="{{ route('employees.store') }}" class="w-full max-w-lg">
         @csrf
 
