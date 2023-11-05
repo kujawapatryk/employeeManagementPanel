@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreEmployeeRequest;
+use App\Models\Company;
+use App\Models\DietaryPreference;
 use App\Repositories\EmployeeRepository;
-use Illuminate\Http\Client\Request;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\View\View;
 
 class EmployeeController extends Controller
@@ -13,7 +17,7 @@ class EmployeeController extends Controller
         $this->employee = $employee;
     }
 
-    public function all(): View
+    public function index(): View
     {
 
         //dd($this->employee->filterBy());
@@ -28,9 +32,20 @@ class EmployeeController extends Controller
         return $this->employee->getOne(2);
     }
 
-    public function create(Request $request)
+    public function create(): View
     {
+        return view('employee.create',[
+            'companies' => Company::all(),
+            'dietaryPreferences' => DietaryPreference::all()
+        ]);
+    }
 
+//StoreEmployeeRequest
+    public function store(StoreEmployeeRequest $request): RedirectResponse
+    {
+        $validatedData = $request->validated(); // Pobierz zweryfikowane dane jako tablicę
+        $this->employee->create($validatedData);
+        return redirect()->route('employees.create')->with('success', 'Pracownik został dodany.');
     }
 
     public function edit()
