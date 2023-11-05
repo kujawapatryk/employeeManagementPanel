@@ -36,13 +36,16 @@ Route::group([
     Route::post('/new', [EmployeeController::class, 'store'])
         ->name('store');
 
+    Route::get('{employee}/edit', [EmployeeController::class, 'edit'])
+        ->name('edit');
+
     Route::get('{employee}', [EmployeeController::class, 'showDetails'])
         ->name('show');
 
-    Route::patch('', [EmployeeController::class, 'update'])
+    Route::patch('{employee}', [EmployeeController::class, 'update'])
         ->name('update');
 
-    Route::delete('', [EmployeeController::class, 'remove'])
+    Route::delete('{employee}', [EmployeeController::class, 'remove'])
         ->name('remove');
 
 });
