@@ -14,7 +14,7 @@
     <nav class="bg-blue-500 p-4 mx-auto max-w-screen-lg rounded mb-8">
         <ul class="flex space-x-4">
             <li class="nav-item active">
-                <a class="text-white px-4 py-2 rounded-full" href="/">Wszyscy Pracownicy</a>
+                <a class="text-white px-4 py-2 rounded-full" href="{{route('employees.list')}}">Wszyscy Pracownicy</a>
             </li>
             <li class="nav-item">
                 <a class="text-white px-4 py-2 rounded-full" href="{{route('employees.create')}}">Dodaj pracownika</a>
