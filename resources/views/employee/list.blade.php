@@ -2,13 +2,23 @@
 
 @section('content')
 
+
+
     <table class="min-w-full divide-y divide-gray-200">
         <thead class="bg-gray-50">
         <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Imię</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nazwisko</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">E-mail</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Firma</th>
+            <x-sortable-column column="first_name" :currentSort="request('sort_by')" :currentOrder="request('order', 'asc')">
+                Imię
+            </x-sortable-column>
+            <x-sortable-column column="last_name" :currentSort="request('sort_by')" :currentOrder="request('order', 'asc')">
+                Nazwisko
+            </x-sortable-column>
+            <x-sortable-column column="email" :currentSort="request('sort_by')" :currentOrder="request('order', 'asc')">
+                E-mail
+            </x-sortable-column>
+            <x-sortable-column column="company" :currentSort="request('sort_by')" :currentOrder="request('order', 'asc')">
+                Firma
+            </x-sortable-column>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Telefon</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Preferencje Żywieniowe</th>
             <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Akcje</th>
