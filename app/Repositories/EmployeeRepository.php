@@ -46,7 +46,7 @@ class EmployeeRepository
                 $query->orderBy($sortBy, $sortOrder);
             }
 
-        return $query->paginate(15);
+        return $query->paginate(config('employees.pagination.per_page'));
     }
 
     public function create($data)
