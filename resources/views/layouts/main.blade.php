@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Nawigacja</title>
+    <title>Panel zarządzania pracownikami</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 
