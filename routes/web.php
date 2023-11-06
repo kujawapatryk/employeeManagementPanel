@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,8 +15,37 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+
+Route::redirect('/', '/employees');
+
+Route::group([
+    'prefix' => 'employees',
+    'namespace' => 'Employees',
+    'as' => 'employees.'
+], function () {
+
+    Route::get('', [EmployeeController::class, 'index'])
+        ->name('list');
+
+    Route::get('/new', [EmployeeController::class, 'create'])
+        ->name('create');
+
+    Route::post('/new', [EmployeeController::class, 'store'])
+        ->name('store');
+
+    Route::get('{employee}/edit', [EmployeeController::class, 'edit'])
+        ->name('edit');
+
+    Route::get('{employee}', [EmployeeController::class, 'showDetails'])
+        ->name('show');
+
+    Route::patch('{employee}', [EmployeeController::class, 'update'])
+        ->name('update');
+
+    Route::delete('{employee}', [EmployeeController::class, 'remove'])
+        ->name('remove');
+
 });
 
 Route::get('/dashboard', function () {

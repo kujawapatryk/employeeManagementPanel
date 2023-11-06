@@ -1,4 +1,5 @@
 import './bootstrap';
+import './employee-search.js';
 
 import Alpine from 'alpinejs';
 
