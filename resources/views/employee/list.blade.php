@@ -3,7 +3,7 @@
 @section('content')
 
     <form id="search-form" action="" method="GET" class="mb-4">
-        <input type="text" name="search" placeholder="Szukaj..." value="{{ request('search') }}" class="mb-4">
+        <input type="text" name="search" placeholder="Szukaj..." value="{{ request('search') }}" class="mb-4" />
         <select name="company_id" class="mb-4">
             <option value="">Wybierz firmę</option>
             @foreach($companies as $company)
@@ -68,15 +68,6 @@
     </table>
     {{ $employees->appends(request()->query())->links() }}
 
-    <script>
-        document.getElementById('search-form').addEventListener('submit', function() {
-            if (!this.search.value.trim()) {
-                this.search.removeAttribute('name');
-            }
-            if (!this.company_id.value.trim()) {
-                this.company_id.removeAttribute('name');
-            }
-        });
-    </script>
+
 
 @endsection
