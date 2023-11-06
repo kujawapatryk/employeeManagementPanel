@@ -28,7 +28,7 @@
             </ul>
         </nav>
 
-        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-screen-xl">
+        <div class="container mx-auto p-6 bg-white shadow-lg rounded-lg max-w-screen-xxl">
             @include('components.alerts')
             @yield('content')
         </div>
