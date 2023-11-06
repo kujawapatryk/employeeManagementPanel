@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Employee;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Pagination\LengthAwarePaginator;
 
 class EmployeeRepository
@@ -29,6 +30,10 @@ class EmployeeRepository
                     ->orWhere('last_name', 'like', "%{$searchTerm}%")
                     ->orWhere('email', 'like', "%{$searchTerm}%");
             });
+        }
+        $companyId = $request['company_id'] ?? null;
+        if ($companyId) {
+            $query->where('company_id', $companyId);
         }
 
         return $query->paginate(15);

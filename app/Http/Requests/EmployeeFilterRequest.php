@@ -27,6 +27,11 @@ class EmployeeFilterRequest extends FormRequest
                 'string',
                 'max:255'
             ],
+            'company_id' => [
+                'sometimes',
+                'integer',
+                'exists:companies,id'
+            ],
 
         ];
     }
