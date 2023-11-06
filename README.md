@@ -4,7 +4,7 @@ The `employeeManagementPanel` is a web application that enables the management o
 
 ## Prerequisites
 
-- PHP >= 8.0
+- PHP >= 8.1
 - Composer
 - Laravel 10
 - Node.js & NPM
