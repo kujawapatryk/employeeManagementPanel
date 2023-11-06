@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmployeeFilterRequest;
 use App\Http\Requests\StoreEmployeeRequest;
 use App\Models\Company;
 use App\Models\DietaryPreference;
@@ -17,12 +18,12 @@ class EmployeeController extends Controller
         $this->employeeRepo = $employeeRepo;
     }
 
-    public function index(): View
+    public function index(EmployeeFilterRequest $request): View
     {
 
-        //dd($this->employee->filterBy());
+        $validatedData = $request->validated();
         return view('employee.list',[
-            'employees' => $this->employeeRepo->filterBy(),
+            'employees' => $this->employeeRepo->filterBy($validatedData),
         ]);
 
     }
