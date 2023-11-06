@@ -24,6 +24,7 @@ class EmployeeController extends Controller
         $validatedData = $request->validated();
         return view('employee.list',[
             'employees' => $this->employeeRepo->filterBy($validatedData),
+            'companies' => Company::all(),
         ]);
 
     }

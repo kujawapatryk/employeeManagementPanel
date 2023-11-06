@@ -2,6 +2,19 @@
 
 @section('content')
 
+    <form id="search-form" action="" method="GET" class="mb-4">
+        <input type="text" name="search" placeholder="Szukaj..." value="{{ request('search') }}" class="mb-4">
+        <select name="company_id" class="mb-4">
+            <option value="">Wybierz firmę</option>
+            @foreach($companies as $company)
+                <option value="{{ $company->id }}" {{ request('company_id') == $company->id ? 'selected' : '' }}>
+                    {{ $company->name }}
+                </option>
+            @endforeach
+        </select>
+
+        <button type="submit" class="bg-blue-500 text-white rounded px-4 py-2">Filtruj</button>
+    </form>
 
 
     <table class="min-w-full divide-y divide-gray-200">
@@ -41,19 +54,29 @@
                 </td>
                 <td class="px-6 py-4 whitespace-nowrap">{{ $employee->dietaryPreference->name }}</td>
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                    <a href="{{ route('employees.edit', $employee) }}" class="text-indigo-600 hover:text-indigo-900">Edytuj</a>
+                    <a href="{{ route('employees.edit', $employee) }}" class="bg-indigo-600 text-white rounded px-4 py-2 hover:bg-indigo-700 mr-2">Edytuj</a>
                     <form method="post" action="{{ route('employees.remove', $employee->id) }}" class="inline">
                         @csrf
                         @method('delete')
-                        <button type="submit" class="text-red-600 hover:text-red-800">Usuń</button>
+                        <button type="submit" class="bg-red-600 text-white rounded px-4 py-2 hover:bg-red-700 ml-2">Usuń</button>
                     </form>
                 </td>
+
             </tr>
         @endforeach
         </tbody>
     </table>
     {{ $employees->appends(request()->query())->links() }}
 
-
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function() {
+            if (!this.search.value.trim()) {
+                this.search.removeAttribute('name');
+            }
+            if (!this.company_id.value.trim()) {
+                this.company_id.removeAttribute('name');
+            }
+        });
+    </script>
 
 @endsection
