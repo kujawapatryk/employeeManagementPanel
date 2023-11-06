@@ -29,11 +29,6 @@ class EmployeeController extends Controller
 
     }
 
-    public function showDetails()
-    {
-        return $this->employeeRepo->getOne(2);
-    }
-
     public function create(): View
     {
         return view('employee.create',[
@@ -42,7 +37,6 @@ class EmployeeController extends Controller
         ]);
     }
 
-//StoreEmployeeRequest
     public function store(StoreEmployeeRequest $request): RedirectResponse
     {
         $validatedData = $request->validated();
@@ -87,5 +81,5 @@ class EmployeeController extends Controller
                 ->withErrors('Nie udało się usunąć pracownika.');
         }
     }
-    //
+
 }

@@ -22,7 +22,6 @@ class EmployeeRepository
     public function filterBy(array $request): LengthAwarePaginator
     {
         $query = $this->employee->with(['company', 'dietaryPreference']);
-//dd($request);
         $searchTerm = $request['search'] ?? null;
         if ($searchTerm) {
             $query->where(function ($query) use ($searchTerm) {
