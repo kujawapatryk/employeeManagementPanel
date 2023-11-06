@@ -30,9 +30,9 @@ class EmployeeFactory extends Factory
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'email' => $this->faker->unique()->safeEmail,
-            'company_id' => Company::query()->inRandomOrder()->first()->id,
+            'company_id' => Company::query()->inRandomOrder()->first()?->id ?? Company::factory()->create()->id,
             'phone_numbers' =>  $phoneNumbers,
-            'dietary_preference_id' => DietaryPreference::query()->inRandomOrder()->first()->id,
+            'dietary_preference_id' => DietaryPreference::query()->inRandomOrder()->first()?->id ?? DietaryPreference::factory()->create()->id,
         ];
     }
 }
