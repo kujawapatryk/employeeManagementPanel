@@ -20,7 +20,7 @@ class EmployeeFactory extends Factory
      */
     public function definition(): array
     {
-        $faker = \Faker\Factory::create('pl_PL'); /
+        $faker = \Faker\Factory::create('pl_PL');
         $phoneNumbers = [];
 
         for ($i = 0; $i < rand(1, 5); $i++) {
