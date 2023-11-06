@@ -36,6 +36,17 @@ class EmployeeRepository
             $query->where('company_id', $companyId);
         }
 
+        $sortBy = $request['sort_by'] ?? 'last_name';
+        $sortOrder = $request['order'] ?? 'asc';
+
+        $validSortFields = ['first_name', 'last_name', 'email', 'company'];
+
+            if ($sortBy == 'company.name') {
+                $query->join('companies', 'employees.company_id', '=', 'companies.id')
+                    ->orderBy('companies.name', $sortOrder);
+            } else {
+                $query->orderBy($sortBy, $sortOrder);
+            }
         return $query->paginate(15);
     }
 

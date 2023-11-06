@@ -32,6 +32,16 @@ class EmployeeFilterRequest extends FormRequest
                 'integer',
                 'exists:companies,id'
             ],
+            'sort_by' => [
+                'sometimes',
+                'string',
+                'in:first_name,last_name,email,company',
+            ],
+            'order' => [
+                'sometimes',
+                'string',
+                'in:asc,desc',
+            ],
 
         ];
     }
