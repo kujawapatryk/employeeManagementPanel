@@ -6,6 +6,14 @@ The `employeeManagementPanel` is a web application that enables the management o
 
 Check out the live demo of the application here: [https://managementpanel.heyweb.pl/](https://managementpanel.heyweb.pl/)
 
+## Features
+- **Employee Management**: Create, read, update, and delete employee records.
+- **Data Structure**: Uses Laravel migrations for database structure and Eloquent entities.
+- **Data Presentation**: Displays all employee data with pagination. Includes text search by name, surname, and email, and filtering by company.
+- **Sorting**: Allows sorting by fields such as name, surname, email, and company.
+- **Validation**: Includes validation for required functionalities.
+- **Soft Delete**: Implements soft delete for safer data management.
+
 ## Requirements
 
 - PHP >= 8.1
